@@ -1,0 +1,193 @@
+.main insert_testing
+
+.include 'wnd:windows.def'	;include needed windows defs
+.include 'mfd:gwindow.mfd'      ;include needed defs
+.INCLUDE 'MFD:CTL.MFD'		;INPUT PARAMETERS
+.include 'ecusmas'  repository 'rpsloc',record='cusmas'
+
+record channels
+	ch$cusmas               ,d4
+	
+	
+record varibales
+	epdir			,a5
+	file_name		,a12
+	Str_Isam_name		,a20
+	decerr			,d4
+	
+	
+.proc
+	
+	onerror lblErrtrap
+	xcall startup_windows
+	xcall btchlogin('Insert_cusmas','geethanjali.canchi02',' ',' ',decErr)
+	xcall setedg
+       ;xcall set_test_data(72,'IFNTPPIS')
+
+;*********************************************	
+;File Opening
+;********************************************
+	epdir = 'EP10:'
+	file_name = 'cusmas.ism'
+	Str_Isam_name = %atrim(epdir)+ %atrim(file_name); For prod
+	ch$cusmas = %syn_freechn(256,1024)
+	open(ch$cusmas,'U:I',%atrim(Str_Isam_name))
+	clear cusmas
+	
+;********************************************************
+;Sequential Read for non keys
+;********************************************************
+	
+lbl_insert,
+	XCALL W_DISP (G_WNDID,wd_updt,WD_POS,6,1,WD_CLR,WDC_EOW,'Going to Insert Customer 1363149044 ',wd_updt)
+	cusmas.cloc =10
+	cusmas.cusno="0581344435"
+	cusmas.name='SANTIAGO, NILSA'
+	cusmas.add1='529 W WESTVILLE AVE APT B2'
+	cusmas.city='ROSELLE PARK'
+	cusmas.state='NJ'
+	cusmas.zip=072040000
+	cusmas.county=''
+	cusmas.telno=9085903534
+	cusmas.telext=''
+	cusmas.origds=11102021
+	cusmas.sex='F'
+	cusmas.BRTHDT=02121963
+	cusmas.txexmp=
+	cusmas.drno(1)=
+	cusmas.drno(2)=
+	cusmas.drno(3)=
+	cusmas.drno(4)=
+	cusmas.diagno(1)=
+	cusmas.diagno(2)=
+	cusmas.diagno(3)=
+	cusmas.diagno(4)=
+	cusmas.diagno(5)=
+	cusmas.diagno(6)=
+	;cusmas.adddiag(1)=''
+	;cusmas.adddiag(2)=''
+	cusmas.stopst=''
+	;cusmas.inforeq=''
+	cusmas.compy=001
+	cusmas.tmpflg=
+	cusmas.dmepos=
+	cusmas.svyflg=
+	cusmas.prog=
+	cusmas.ptauth='N' ;strcustomerauth
+	cusmas.waive=
+	cusmas.plcsrv=
+	cusmas.contct=
+	cusmas.contph=
+	cusmas.cntphe=
+	cusmas.cemply=
+	cusmas.cempph=
+	cusmas.cempxt=
+	cusmas.cexnum=
+	cusmas.injydt=
+	cusmas.rblday=
+	cusmas.o2flg=
+	cusmas.entflg=
+	cusmas.strinfusion=
+	cusmas.o2cmn=
+	cusmas.entcmn=
+	cusmas.msccmn=
+	cusmas.cust_link=
+	cusmas.datlststmntsent=
+	cusmas.datfststmntsent=
+	cusmas.flgcollectionsent=
+	cusmas.flgpcp(1)=
+	cusmas.flgpcp(2)=
+	cusmas.flgpcp(3)=
+	cusmas.flgpcp(4)=
+	;cusmas.noname001=
+	cusmas.emailconfirmdate=
+	cusmas.cellphonenumber=9085903534
+	cusmas.stopbl=
+	cusmas.caltno=
+	cusmas.cdlbox=
+	cusmas.custyp='NT'
+	cusmas.infolw=
+	cusmas.folblr=
+	cusmas.marsts=
+	cusmas.ifdflg=
+	cusmas.hghtft=
+	cusmas.hghtin=
+	cusmas.cwght=
+	cusmas.times_testing=
+	cusmas.testing_freq=''
+	cusmas.bill_to_ins=
+	cusmas.relation=''
+	cusmas.cusmas_insulin_dep=''
+	cusmas.padate=
+	cusmas.nppflg=
+	cusmas.nppdt=
+	cusmas.alt_cust=
+	cusmas.hipaa_resub_error=
+	cusmas.decpreferredcarrier=
+	cusmas.flgdmercchange=
+	cusmas.datcredfloordate=
+	cusmas.row_id=
+	cusmas.crm_integrationid=
+	cusmas.crm_name=
+	cusmas.crm_location=
+	cusmas.crm_primary_organization=
+	cusmas.strrdi=
+	cusmas.noname_003=
+	cusmas.rowid_address=
+;	cusmas.datprod_follow_up_date=
+;	cusmas.strprod_follow_up_who=
+	cusmas.dectimescathing=
+	cusmas.strcathingfrequency=
+	cusmas.language_abbrev='ENGL'
+	cusmas.decexpresscarrier=
+	cusmas.strsmemailonly=
+	cusmas.strapnea_response=
+	cusmas.strcpap_response=
+	cusmas.strdrainagecode_resp=
+	cusmas.decdrainagetimes_resp=
+	cusmas.strdrainagesites_resp=
+	cusmas.flg$askedspecialorder=
+	cusmas.straddresskey='CM002'
+	cusmas.datdrainageinsert=
+	cusmas.strbesttime2call=
+	cusmas.drphone(1)=
+	cusmas.drphone(2)=
+	cusmas.drphone(3)=
+	cusmas.drphone(4)=
+	cusmas.draddrkey(1)=
+	cusmas.draddrkey(2)=
+	cusmas.draddrkey(3)=
+	cusmas.draddrkey(4)=
+	cusmas.strphonequalifiertelno=
+	cusmas.strphonequalifiercell=
+	cusmas.strcontactmethod=
+	cusmas.strwhereoriginated='PH'
+	cusmas.strwherehearabout=
+	cusmas.strnewbaltransfer=
+	cusmas.strsmartpost=
+	cusmas.strdailyinsulin=
+	cusmas.dectimesinjecting=
+	cusmas.striswlsent=
+	cusmas.flgdemosent=
+	cusmas.epstacno=
+	cusmas.noname_002=''
+	store(ch$cusmas,cusmas); Adding records in new isam
+	call close_files
+	stop
+lbl_insert_exit,
+	return
+	
+;*********************************************************************
+;Closing Files
+;**********************************************************************
+close_files,
+       close(ch$cusmas)
+       return
+;*********************************
+;Error
+;*********************************
+lblErrtrap,
+	xcall errtrap
+	
+.end
+
