@@ -1,3 +1,4 @@
+;Program to insert records in CUSMAS, Details have to be fetched from SPLUNK
 .main insert_testing
 
 .include 'wnd:windows.def'	;include needed windows defs
@@ -8,13 +9,11 @@
 record channels
 	ch$cusmas               ,d4
 	
-	
 record varibales
 	epdir			,a5
 	file_name		,a12
 	Str_Isam_name		,a20
 	decerr			,d4
-	
 	
 .proc
 	
